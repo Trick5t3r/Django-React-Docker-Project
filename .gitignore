@@ -1,0 +1,25 @@
+# Ignorer le dossier ./env/
+env/
+
+# Ignorer le fichier ./backend/env
+.env
+
+# Ignorer tout dans le dossier ./backend/media/
+backend/media/*
+
+# Ne pas ignorer ce dossier lui-même
+!backend/media/
+
+__pycache__/
+
+log_django.log
+
+logs/
+
+*.bak
+*.log
+*.sqlite3
+
+node_modules/
+
+build/

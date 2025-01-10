@@ -1,0 +1,27 @@
+# Dockerfile.frontend
+# Utiliser une image Node.js comme base
+FROM node:20
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier le reste de l'application
+COPY frontend /app
+
+#Install dependencies
+RUN npm install
+
+# Construire l'application React pour la production
+RUN npm run build
+
+# Exposer le port
+EXPOSE 5173
+
+# Définir une variable d'environnement par défaut
+ENV DEBUG=false
+
+# Script d'entrée pour décider du mode (dev ou prod)
+RUN chmod +x /app/entrypoint_frontend.sh
+
+# Utiliser le script d'entrée
+CMD ["/app/entrypoint_frontend.sh"]

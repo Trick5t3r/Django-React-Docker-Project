@@ -1,0 +1,23 @@
+# Utiliser une image Python
+FROM python:3.10.12-slim
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier le code source
+COPY backend /app
+
+# Copier les dépendances et les installer
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Collecter les fichiers statiques lors de la construction de l'image
+RUN python manage.py collectstatic --noinput
+
+# Exposer le port par défaut pour Django
+EXPOSE 8000
+
+# Script de démarrage conditionnel
+RUN chmod +x /app/entrypoint_backend.sh
+
+# Utiliser le script comme point d'entrée
+CMD ["/app/entrypoint_backend.sh"]

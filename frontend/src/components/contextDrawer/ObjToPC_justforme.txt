@@ -1,0 +1,80 @@
+import React, { useEffect, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler';
+import * as THREE from 'three';
+
+
+const Scene = ({ modelPath = '/assets/models/retro_computer.glb', particleCount = 30000, factor=1 }) => {
+  const groupRef = useRef();
+
+  useEffect(() => {
+    const loader = new GLTFLoader();
+
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3); // Tableau pour stocker les positions des particules
+    const colors = new Float32Array(particleCount * 3); // Tableau pour stocker les couleurs des particules
+
+    loader.load(modelPath, (gltf) => {
+      const model = gltf.scene;
+      const mesh = model.getObjectByProperty('isMesh', true); // Récupère un maillage de la scène
+      if (!mesh) return;
+
+      const sampler = new MeshSurfaceSampler(mesh).build(); // Échantillonne le maillage
+
+      const tempPosition = new THREE.Vector3();
+      const tempColor = new THREE.Color();
+
+      for (let i = 0; i < particleCount; i++) {
+        // Échantillonne une position aléatoire sur le maillage
+        sampler.sample(tempPosition);
+        const i3 = i * 3;
+
+        // Remplit les positions
+        positions[i3] = tempPosition.x/factor;
+        positions[i3 + 1] = tempPosition.y/factor;
+        positions[i3 + 2] = tempPosition.z/factor;
+
+        // Ajoute des couleurs aléatoires (ou personnalisation selon des règles)
+        tempColor.setHSL(Math.random(), 0.7, 0.5);
+        colors[i3] = 0;
+        colors[i3 + 1] = 0;
+        colors[i3 + 2] = 0;
+      }
+
+      // Met à jour la géométrie avec les positions et couleurs
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      // Ajoute les particules au groupe
+      const material = new THREE.PointsMaterial({
+        size: 0.01,
+        vertexColors: true, // Active les couleurs pour chaque particule
+      });
+
+      const points = new THREE.Points(geometry, material);
+      groupRef.current.add(points);
+    });
+
+    return () => {
+      // Nettoyage
+      geometry.dispose();
+
+    };
+  }, [modelPath, particleCount]);
+
+  return (
+    <div style={{ width: '50vw', height: '100vh', overflow: 'hidden' }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} />
+        <axesHelper args={[5]} />
+        <group ref={groupRef} />
+        <OrbitControls enableZoom={true} enablePan={true} />
+      </Canvas>
+    </div>
+  );
+};
+
+export default Scene;
