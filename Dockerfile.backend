@@ -11,13 +11,16 @@ COPY backend /app
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Collecter les fichiers statiques lors de la construction de l'image
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
+RUN python manage.py makemigrations
+RUN python manage.py migrate
 
 # Exposer le port par défaut pour Django
 EXPOSE 8000
 
 # Script de démarrage conditionnel
-RUN chmod +x /app/entrypoint_backend.sh
+#RUN chmod +x /app/entrypoint_backend.sh
 
 # Utiliser le script comme point d'entrée
-CMD ["/app/entrypoint_backend.sh"]
+#CMD ["/bin/bash", "/app/entrypoint_backend.sh"]
+CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:8000 >> /logs/log_django.log 2>&1"]

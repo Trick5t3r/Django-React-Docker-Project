@@ -22,8 +22,10 @@ services:
     container_name: frontend
     environment:
       - DEBUG=true  # Passez à false pour le mode production
+      - NODE_ENV=development
     volumes:
       - ./frontend:/app  # Code source Vite
+      - /app/node_modules
       - ./logs:/logs  # Logs accessibles hors du conteneur
     ports:
       - "5173:5173"  # Mode développement
