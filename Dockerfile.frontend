@@ -17,9 +17,6 @@ RUN npm run build
 # Exposer le port
 EXPOSE 5173
 
-# Définir une variable d'environnement par défaut
-ENV DEBUG=false
-
 # Script d'entrée pour décider du mode (dev ou prod)
 RUN chmod +x /app/entrypoint_frontend.sh
 
