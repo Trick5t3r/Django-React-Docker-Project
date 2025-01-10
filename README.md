@@ -32,22 +32,31 @@ Ce projet m'a permis de :
 ## Prérequis
 
 - **Docker** et **Docker Compose** installés sur votre machine.
-- Python 3.10.12 ou une version compatible pour exécuter le backend localement.
-- Node.js pour développer ou tester le frontend en mode développement.
 
 ---
 
 ## Configuration
 
-### Étape 1 : Configurer le backend
+
+### Étape 1 : Cloner le projet depuis GitHub
+
+Clonez le dépôt GitHub à l'adresse `XXX` :
+   ```bash
+   git clone https://github.com/Trick5t3r/Django-React-Docker-Project.git
+   cd Django-React-Docker-Project
+   ```
+
+### Étape 2 : Configurer le backend
 
 1. Copiez le fichier d'exemple `.env` :
    ```bash
    cp /backend/.env.example /backend/.env
    ```
 
+2. Editer les variables d'environnement pour mettre vos clefs d'API et vos mots de passe du fichier `.env`
 
-### Étape 2 : Builder le docker
+
+### Étape 3 : Builder le docker
   ```bash
   sudo docker-compose up --build -d
   ```
@@ -61,7 +70,7 @@ Et voilà le serveur tourne
   sudo docker ps
   ```
 
-  Pour mettre tous les requirements python dans le bon ficheir et tout rebuild :
+  Pour mettre tous les requirements python dans le bon fichier et tout rebuild :
   ```bash
   sudo ./build_assets_force.sh
   ```
@@ -69,4 +78,13 @@ Et voilà le serveur tourne
   Pour run les différents serveurs avec une conf nginx deja installé idoine
   ```bash
   ./manage.sh start/stop
+  ```
+
+  Pour juste lancer
+  ```bash
+  sudo docker-compose up
+  ```
+  et pour run en background
+  ```bash
+  sudo docker-compose up -d
   ```
