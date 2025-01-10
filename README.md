@@ -58,7 +58,7 @@ Clonez le dépôt GitHub à l'adresse `XXX` :
 
 ### Étape 3 : Builder le docker
   ```bash
-  sudo docker-compose up --build -d
+  docker-compose up --build -d
   ```
 
 Et voilà le serveur tourne
@@ -67,12 +67,12 @@ Et voilà le serveur tourne
   sudo docker-compose down
   ```
   ```bash
-  sudo docker ps
+  docker ps
   ```
 
   Pour mettre tous les requirements python dans le bon fichier et tout rebuild :
   ```bash
-  sudo ./build_assets_force.sh
+  ./build_assets_force.sh
   ```
 
   Pour run les différents serveurs avec une conf nginx deja installé idoine
@@ -82,9 +82,9 @@ Et voilà le serveur tourne
 
   Pour juste lancer
   ```bash
-  sudo docker-compose up
+  docker-compose up
   ```
   et pour run en background
   ```bash
-  sudo docker-compose up -d
+  docker-compose up -d
   ```
