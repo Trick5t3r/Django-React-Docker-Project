@@ -14,7 +14,7 @@ ENV NODE_ENV=development
 RUN npm install
 
 # Copier le reste de l'application
-COPY frontend/ .
+#COPY frontend/ .
 
 # Créer un répertoire pour les logs
 RUN mkdir -p /logs

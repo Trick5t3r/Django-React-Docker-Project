@@ -23,6 +23,7 @@ services:
     environment:
       - DEBUG=true  # Passez à false pour le mode production
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=1  # Force le mode polling
     volumes:
       - ./frontend:/app  # Code source Vite
       - /app/node_modules

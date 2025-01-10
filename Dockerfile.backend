@@ -8,12 +8,10 @@ WORKDIR /app
 COPY backend /app
 
 # Copier les dépendances et les installer
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # Collecter les fichiers statiques lors de la construction de l'image
 #RUN python manage.py collectstatic --noinput
-RUN python manage.py makemigrations
-RUN python manage.py migrate
 
 # Exposer le port par défaut pour Django
 EXPOSE 8000
@@ -23,4 +21,4 @@ EXPOSE 8000
 
 # Utiliser le script comme point d'entrée
 #CMD ["/bin/bash", "/app/entrypoint_backend.sh"]
-CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:8000 >> /logs/log_django.log 2>&1"]
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000 >> /logs/log_django.log 2>&1"]
