@@ -55,6 +55,13 @@ Clonez le dépôt GitHub à l'adresse `XXX` :
 
 2. Editer les variables d'environnement pour mettre vos clefs d'API et vos mots de passe du fichier `.env`
 
+4. Copiez le fichier d'exemple `.env` :
+   ```bash
+   cp /frotend/.env.example /frontend/.env
+   ```
+
+4. Editer les variables d'environnement pour mettre votre url dans le fichier `.env` (defaul localhost)
+
 
 ### Étape 3 : Builder le docker
   ```bash
