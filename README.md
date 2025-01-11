@@ -63,9 +63,20 @@ Clonez le dépôt GitHub à l'adresse `XXX` :
 
 Et voilà le serveur tourne
 ### Commandes supplémentaires
+Pour stop le serveur
 ```bash
-  sudo docker-compose down
+  docker-compose down
   ```
+  Pour juste redemarrer
+  ```bash
+  docker-compose up
+  ```
+  et pour run (redemarrer) en background
+  ```bash
+  docker-compose up -d
+  ```
+
+Pour lister les process docker
   ```bash
   docker ps
   ```
@@ -75,16 +86,7 @@ Et voilà le serveur tourne
   ./build_assets_force.sh
   ```
 
-  Pour run les différents serveurs avec une conf nginx deja installé idoine
+  Pour run en dehors du docker directement sur un ordi linux avec les différents serveurs avec une conf nginx deja installé idoine
   ```bash
   ./manage.sh start/stop
-  ```
-
-  Pour juste lancer
-  ```bash
-  docker-compose up
-  ```
-  et pour run en background
-  ```bash
-  docker-compose up -d
   ```
