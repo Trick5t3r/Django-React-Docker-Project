@@ -50,14 +50,14 @@ Clonez le dépôt GitHub à l'adresse `XXX` :
 
 1. Copiez le fichier d'exemple `.env` :
    ```bash
-   cp /backend/.env.example /backend/.env
+   cp backend/.env.example /backend/.env
    ```
 
 2. Editer les variables d'environnement pour mettre vos clefs d'API et vos mots de passe du fichier `.env`
 
 4. Copiez le fichier d'exemple `.env` :
    ```bash
-   cp /frotend/.env.example /frontend/.env
+   cp frontend/.env.example /frontend/.env
    ```
 
 4. Editer les variables d'environnement pour mettre votre url dans le fichier `.env` (defaul localhost)
